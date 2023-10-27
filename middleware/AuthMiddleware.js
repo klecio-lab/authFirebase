@@ -6,7 +6,8 @@ admin.initializeApp({
 
 // Middleware de autenticação
 const AuthMiddleware = async (req, res, next) => {
-    const token = req.headers['authorization'].replace('Bearer ', '');
+    const token = req.headers['authorization'] ? req.headers['authorization'].replace('Bearer ', '') : null;
+
     if (!token) {
         return res.status(401).json({ message: 'Acesso não autorizado' });
     }
